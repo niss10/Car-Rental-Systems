@@ -1,0 +1,39 @@
+1. CarType
+
+    CarType (
+        id INT PRIMARY KEY,
+        name VARCHAR(20)  -- SEDAN, SUV, VAN
+    )
+
+2. Car
+
+    Car (
+        id INT PRIMARY KEY,
+        type_id INT,
+        status VARCHAR(20),  -- AVAILABLE, MAINTENANCE
+        FOREIGN KEY (type_id) REFERENCES CarType(id)
+    )
+
+3. Customer
+
+    Customer (
+        id INT PRIMARY KEY,
+        name VARCHAR(100),
+        email VARCHAR(100)
+    )
+
+4. Reservation
+
+    Reservation (
+        id INT PRIMARY KEY,
+        customer_id INT,
+        car_id INT NULL,         -- optional (can assign later)
+        car_type_id INT,
+        start_date DATETIME,
+        end_date DATETIME,
+        status VARCHAR(20),      -- ACTIVE, CANCELLED
+
+        FOREIGN KEY (customer_id) REFERENCES Customer(id),
+        FOREIGN KEY (car_id) REFERENCES Car(id),
+        FOREIGN KEY (car_type_id) REFERENCES CarType(id)
+    )
